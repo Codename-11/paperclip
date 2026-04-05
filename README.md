@@ -1,3 +1,7 @@
+> **Fork Notice:** This is [Codename-11's fork](https://github.com/Codename-11/paperclip) of [paperclipai/paperclip](https://github.com/paperclipai/paperclip). See [FORK.md](./FORK.md) for added features and upgrade instructions.
+
+---
+
 <p align="center">
   <img src="doc/assets/header.png" alt="Paperclip — runs your business" width="720" />
 </p>
