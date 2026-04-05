@@ -38,6 +38,9 @@ import { CommentThread } from "../components/CommentThread";
 import { IssueDocumentsSection } from "../components/IssueDocumentsSection";
 import { IssueProperties } from "../components/IssueProperties";
 import { IssueWorkspaceCard } from "../components/IssueWorkspaceCard";
+import { DeliverablePanel } from "../components/DeliverablePanel";
+import { AgentChatPanel } from "../components/AgentChatPanel";
+import { WorkspaceFileViewer } from "../components/WorkspaceFileViewer";
 import { LiveRunWidget } from "../components/LiveRunWidget";
 import type { MentionOption } from "../components/MarkdownEditor";
 import { ImageGalleryModal } from "../components/ImageGalleryModal";
@@ -1505,6 +1508,21 @@ export function IssueDetail() {
             <ActivityIcon className="h-3.5 w-3.5" />
             Activity
           </TabsTrigger>
+          <TabsTrigger value="deliverables" className="gap-1.5">
+            <Check className="h-3.5 w-3.5" />
+            Deliverables
+          </TabsTrigger>
+          <TabsTrigger value="chat" className="gap-1.5">
+            <MessageSquare className="h-3.5 w-3.5" />
+            Chat
+          </TabsTrigger>
+          {issue.executionWorkspaceId && (
+            <TabsTrigger value="files" className="gap-1.5">
+              <Paperclip className="h-3.5 w-3.5" />
+              Files
+            </TabsTrigger>
+          )}
+
           {issuePluginTabItems.map((item) => (
             <TabsTrigger key={item.value} value={item.value}>
               {item.label}
@@ -1634,6 +1652,29 @@ export function IssueDetail() {
                 </div>
               ))}
             </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="deliverables">
+          <DeliverablePanel companyId={issue.companyId} issueId={issue.id} />
+        </TabsContent>
+
+        <TabsContent value="chat">
+          <AgentChatPanel
+            companyId={issue.companyId}
+            agentId={issue.assigneeAgentId}
+            issueId={issue.id}
+          />
+        </TabsContent>
+
+        <TabsContent value="files">
+          {issue.executionWorkspaceId ? (
+            <WorkspaceFileViewer
+              companyId={issue.companyId}
+              workspaceId={issue.executionWorkspaceId}
+            />
+          ) : (
+            <p className="text-sm text-muted-foreground py-4">No workspace attached to this issue.</p>
           )}
         </TabsContent>
 

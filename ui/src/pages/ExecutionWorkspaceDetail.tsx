@@ -5,6 +5,7 @@ import type { ExecutionWorkspace, Project, ProjectWorkspace } from "@paperclipai
 import { ArrowLeft, Check, Copy, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { WorkspaceFileViewer } from "../components/WorkspaceFileViewer";
 import { CopyText } from "../components/CopyText";
 import { ExecutionWorkspaceCloseDialog } from "../components/ExecutionWorkspaceCloseDialog";
 import { executionWorkspacesApi } from "../api/execution-workspaces";
@@ -797,6 +798,19 @@ export function ExecutionWorkspaceDetail() {
             </div>
           </div>
         </div>
+
+        {workspace.cwd && (
+          <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="space-y-1 mb-4">
+              <div className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Workspace files</div>
+              <h2 className="text-lg font-semibold">File Browser</h2>
+              <p className="text-sm text-muted-foreground">
+                Browse the files in this execution workspace.
+              </p>
+            </div>
+            <WorkspaceFileViewer companyId={workspace.companyId} workspaceId={workspace.id} />
+          </div>
+        )}
 
         <div className="rounded-2xl border border-border bg-card p-5">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">

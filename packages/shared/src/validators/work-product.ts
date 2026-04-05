@@ -8,6 +8,7 @@ export const issueWorkProductTypeSchema = z.enum([
   "commit",
   "artifact",
   "document",
+  "deliverable",
 ]);
 
 export const issueWorkProductStatusSchema = z.enum([
